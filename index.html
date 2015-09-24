@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Server Rendering with React.js</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Server Side Rendering with React.js</h1>
+					<p>
+						<small><a href="http://songawee.com">Dennis Johnson</a> / <a href="http://twitter.com/songawee">@songawee</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Why Server Rendering?</h2>
+					<div>
+						<h3>Benefits</h3>
+						<ul>
+							<li>Initial page load performance</li>
+							<li>SEO</li>
+							<li>Graceful degradation (demo)</li>
+							<li>Mobile performance</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<p>It isn't anything new...</p>
+				</section>
+
+				<section>
+					<h1>Before...</h1>
+				</section>
+
+				<section>
+					<h2>Browsers were simple</h2>
+					<h4>Server rendered apps</h4>
+					<ul>
+						<li>great initial page load performance</li>
+						<li>user interactions weren't smooth because you had to make requests for everything and wait for the server to update the view</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Then...</h1>
+				</section>
+
+				<section>
+					<div style="font-size: 50px;">
+						[angular] [ember] [react]
+					</div>
+				</section>
+
+				<section>
+					<h2>Browsers get better</h2>
+					<h4>Client rendered apps</h4>
+					<ul>
+						<li>rich user interaction and performance</li>
+						<li>poor initial page load performance</li>
+						<li>lack of SEO*</li>
+					</ul>
+					<p style="font-size: 20px"><em>*You can use a tool like <a href="http://prerender.io">http://prerender.io</a> to provide markup from your SPA for search engines</em></p>
+				</section>
+
+				<section>
+					<h2>Can we have both?</h2>
+				</section>
+
+				<section>
+					<img src="https://d12vb6dvkz909q.cloudfront.net/uploads/galleries/342/monty-python-image-1.jpg" />
+					<a href="https://www.kreuzwerker.de/en/blog/posts/the-holy-grail-of-modern-and-fast-web-application-development">[holy grail]</a>
+				</section>
+
+				<section>
+					<p><a href="https://blog.twitter.com/2012/improving-performance-on-twittercom">Twitter</a> reduced the time to first tweet to 1/5 by rendering their client heavy application on the server</p>
+					<p>This greatly improved performance for slower devices</p>
+				</section>
+
+				<section>
+					<h2>Why React.js?</h2>
+				</section>
+
+				<section>
+					<h2>React.js</h2>
+					<p>Build the app on the server and the client using the same application code using provided utilities</p>
+					<ul>
+						<li>virtual DOM - represent your component tree in JS</li>
+						<li>diffing algorithm - perform as few updates as needed on the DOM</li>
+					</ul>
+				</section>
+<!--
+				<section>
+					<h2>How does it work?</h2>
+				</section> -->
+
+				<section>
+					<h2>Virtual DOM</h2>
+					<p>Without the requirement of an actual DOM, you can run your app anywhere JS runs!</p>
+					<ul>
+						<li>Browsers</li>
+						<li>Node.js</li>
+						<li>JVM</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Virtual Diffing</h2>
+					<p>Record and diff a checksum generated on the server of your app's HTML with the checksum that the client render returns</p>
+					<ul>
+						<li>if they are equal, no DOM updates are performed and the event listeners will be wired up</li>
+						<li>if the are different, React will warn (in dev mode) that your markup doesn't match and re-render</li>
+					</ul>
+					<br />
+				</section>
+
+				<section>
+					<img src="/img/warning.png" />
+				</section>
+
+				<section>
+					<h2>Isomorphic / Universal</h2>
+					<p>Share as much code as you can between environments</p>
+					<ul>
+						<li>rendering</li>
+						<li>data fetching</li>
+						<li>routing</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What about Flux?</h2>
+					<p>Need some way of coordinating data flow that works in every environment...</p>
+				</section>
+
+				<section>
+					<h2>Isomorphic Flux</h2>
+					<ul>
+						<li><a href="https://github.com/acdlite/flummox">flummox</a></li>
+						<li><a href="http://martyjs.org/">marty.js</a></li>
+						<li><a href="https://github.com/rackt/redux">redux</a></li>
+						<li><a href="https://facebook.github.io/relay/">etc...</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Data Flow</h2>
+					<ul>
+						<li>asynchronously build up your stores' state on the server so that you can render a complete component tree</li>
+						<li>serialize and pass that data down to the client</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Request Timeline</h2>
+					<ul>
+						<li>client makes request</li>
+						<li>server renders the application corresponding to the url</li>
+						<li>server passes the HTML and initial state to the client</li>
+						<li>client renders HTML and begins bootstrapping application</li>
+						<li>React diffs markup chucksums between renders and attaches listeners</li>
+						<li>page is now ready</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Altogether...</h2>
+					<p>Now we have a single page application that has the benefits of server rendering while also providing the rich user experience of a client rendered application.</p>
+				</section>
+
+				<section>
+					<h2>Demo!</h2>
+				</section>
+
+        <section>
+          <h2>Thanks</h2>
+          <p>
+            <a href="http://twitter.com/songawee">@songawee</a> - github/twitter
+          </p>
+        </section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
