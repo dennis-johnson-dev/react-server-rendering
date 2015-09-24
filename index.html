@@ -41,7 +41,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Server Side Rendering with React.js</h1>
+					<h1>Server Rendering with React.js</h1>
 					<p>
 						<small><a href="http://songawee.com">Dennis Johnson</a> / <a href="http://twitter.com/songawee">@songawee</a></small>
 					</p>
@@ -118,7 +118,7 @@
 
 				<section>
 					<h2>React.js</h2>
-					<p>Build the app on the server and the client using the same application code using provided utilities</p>
+					<p>Allows you to build the app on the server and the client using the same application code</p>
 					<ul>
 						<li>virtual DOM - represent your component tree in JS</li>
 						<li>diffing algorithm - perform as few updates as needed on the DOM</li>
@@ -127,7 +127,7 @@
 
 				<section>
 					<h2>Virtual DOM</h2>
-					<p>Without the requirement of an actual DOM, you can run your app anywhere JS runs!</p>
+					<p>Without the requirement of an actual DOM in a browser, you can run your app anywhere JS runs!</p>
 					<ul>
 						<li>Browsers</li>
 						<li>Node.js</li>
@@ -143,10 +143,6 @@
 						<li>if the are different, React will warn (in dev mode) that your markup doesn't match and re-render</li>
 					</ul>
 					<br />
-				</section>
-
-				<section>
-					<img src="/react-server-rendering/img/warning.png" />
 				</section>
 
 				<section>
@@ -179,6 +175,15 @@
 					<ul>
 						<li>asynchronously build up your stores' state on the server so that you can render a complete component tree</li>
 						<li>serialize and pass that data down to the client</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>A note on singletons</h2>
+					<p>Some Flux implementations use singletons and you can get into unknown/undesirable states when you <em>require</em> a store.</p>
+					<ul>
+						<li>namespace your state in your stores</li>
+						<li>use a Flux implementation that passes new objects down through props or on the context</li>
 					</ul>
 				</section>
 
